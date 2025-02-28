@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HPC in Brazil</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #003366;
+            color: white;
+        }
+        #map {
+            width: 80%;
+            height: 400px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>High-Performance Computing Centers in Brazil</h1>
+        <p>A map and list of major HPC centers across Brazil.</p>
+    </header>
+    
+    <section>
+        <h2>HPC Centers Map</h2>
+        <div id="map"></div>
+    </section>
+    
+    <section>
+        <h2>HPC Centers List</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Institution</th>
+            </tr>
+            <tr>
+                <td>LNCC - Santos Dumont</td>
+                <td>Petrópolis, RJ</td>
+                <td>Laboratório Nacional de Computação Científica</td>
+            </tr>
+            <tr>
+                <td>SENAI CIMATEC</td>
+                <td>Salvador, BA</td>
+                <td>SENAI CIMATEC</td>
+            </tr>
+            <tr>
+                <td>CESUP/UFRGS</td>
+                <td>Porto Alegre, RS</td>
+                <td>UFRGS</td>
+            </tr>
+        </table>
+    </section>
+    
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([-14.235, -51.9253], 4);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        var locations = [
+            { name: "LNCC - Santos Dumont", coords: [-22.5045, -43.1785] },
+            { name: "SENAI CIMATEC", coords: [-12.8654, -38.4322] },
+            { name: "CESUP/UFRGS", coords: [-30.0331, -51.2302] }
+        ];
+
+        locations.forEach(function(loc) {
+            L.marker(loc.coords).addTo(map).bindPopup(loc.name);
+        });
+    </script>
+</body>
+</html>
